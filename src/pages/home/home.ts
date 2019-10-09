@@ -13,8 +13,14 @@ import { NavController, IonicPage } from 'ionic-angular';
 // Definicao e Nome da classe controladora
 export class HomePage {
 
+  // Injecao de dependencia -  basta declarar a classe com parametro no construtor da classe
+  // NavController - classe de navegação de paginas
   constructor(public navCtrl: NavController) {
 
+  }
+
+  login(){
+    this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
   }
 
 }
