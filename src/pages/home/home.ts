@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, MenuController } from 'ionic-angular';
 
 // Permite referenciar a classe como string escrevendo seu nome entre aspas ex: "HomePage"
 @IonicPage()
@@ -15,11 +15,19 @@ export class HomePage {
 
   // Injecao de dependencia -  basta declarar a classe com parametro no construtor da classe
   // NavController - classe de navegação de paginas
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public menu: MenuController) {
 
   }
 
-  login(){
+  ionViewWillEnter() {
+    this.menu.swipeEnable(false);
+  }
+  
+  ionViewDidLeave() {
+    this.menu.swipeEnable(true);
+  }
+
+  login() {
     this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
   }
 
