@@ -13,6 +13,7 @@ export class MyApp {
 
   // declaracao de variaveis
   @ViewChild(Nav) nav: Nav;
+
   rootPage: string  = "HomePage";
   pages: Array<{title: string, component: string}>;
 
@@ -23,7 +24,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: "HomePage" },
+      { title: 'Home', component: 'HomePage' },
       
     ];
 
