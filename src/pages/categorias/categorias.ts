@@ -30,7 +30,15 @@ export class CategoriasPage {
       //console.log(response);
 
     }, error => {
-      console.log(error);
+
+      // As msg de erro estão sendo exibidas pelao interceptor( error-interceptors.ts)
+      // Essa funcao ( error = { } ) em branco é necessaria para que, 
+      // o erro não seja exibido duas vezes, mas ela pode ser usada para 
+      // outros tratamentos de erros que se achar necessarios
+      error ={
+        
+      }
+
     });
   
   }
