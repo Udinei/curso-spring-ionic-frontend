@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
+import { CredenciaisDTO } from '../../models/credenciais.dto';
 
 // Permite referenciar a classe como string escrevendo seu nome entre aspas ex: "HomePage"
 @IonicPage()
@@ -10,8 +11,15 @@ import { NavController, IonicPage, MenuController } from 'ionic-angular';
   templateUrl: 'home.html' // nome da pagina controlada por este controller
 })
 
+
 // Definicao e Nome da classe controladora
 export class HomePage {
+
+  creds : CredenciaisDTO = {
+    email : "",
+    senha : ""
+  };
+
 
   // Injecao de dependencia -  basta declarar a classe com parametro no construtor da classe
   // NavController - classe de navegação de paginas
@@ -28,6 +36,7 @@ export class HomePage {
   }
 
   login() {
+    console.log(this.creds)
     this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
   }
 
