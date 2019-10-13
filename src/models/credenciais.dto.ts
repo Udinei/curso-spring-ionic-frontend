@@ -1,5 +1,5 @@
 ﻿export interface CredenciaisDTO {
     email : string,
-    senha : string,
+    senha : string
 
 }

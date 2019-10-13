@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
+import { AuthService } from '../../Services/auth.service';
 
 // Permite referenciar a classe como string escrevendo seu nome entre aspas ex: "HomePage"
 @IonicPage()
@@ -16,28 +17,38 @@ import { CredenciaisDTO } from '../../models/credenciais.dto';
 export class HomePage {
 
   creds : CredenciaisDTO = {
-    email : "",
-    senha : ""
+    email: "",
+    senha: ""
   };
 
 
   // Injecao de dependencia -  basta declarar a classe com parametro no construtor da classe
   // NavController - classe de navegação de paginas
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public auth: AuthService) // injetando classe AuthService em auth, declara em auth.services.ts
+  {
 
   }
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
   }
-  
+
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
 
   login() {
-    console.log(this.creds)
-    this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
+    this.auth.authenticate(this.creds)
+      .subscribe(response => { // se inscrevendo para poder receber a resposta do metodo
+        console.log(response.headers)
+        console.log(response.headers.get("Authorization"));
+                                          
+        this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
+      },
+        error => { }
+      );
   }
-
 }
