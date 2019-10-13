@@ -38,7 +38,17 @@ export class ProfilePage {
           this.cliente = response; // atribui ao cliente o clienteDTO recebido do request
           this.getImageIfExists();
       },
-      error => { });
+      error => { 
+
+        // se userLocal invalido
+        if (error.status == 403) {
+          // redireciona para a home
+          this.navCtrl.setRoot('HomePage');
+        }
+      });
+    }
+    else {
+      this.navCtrl.setRoot('HomePage');
     }
   }
 
