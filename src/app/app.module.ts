@@ -14,6 +14,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptors';
 import { AuthService } from '../Services/auth.service';
 import { StorageService } from '../Services/storage.service';
 import { ClienteService } from '../Services/domain/cliente.service';
+import { AuthInterceptor, AuthInterceptorProvider } from '../interceptors/Auth-interceptor';
 
 //  @NgModule - Decorator são configuração que possuem atribuos e objetos com atributos:[] para alterar a classe
 @NgModule({
@@ -36,6 +37,7 @@ import { ClienteService } from '../Services/domain/cliente.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService, 
     StorageService,

@@ -15,21 +15,14 @@ export class ClienteService {
 
     }
 
-    // busca clienteDTO no backend por email
+    /**  Esse metodo sera interceptado por AuthInterceptor, para inserir o cabeçalho na requisicao caso 
+        busca clienteDTO no backend por email */
     findByEmail(email: string) : Observable<ClienteDTO> {
 
-        // obtem o token gravado no storage
-        let token = this.storage.getlocalUser().token;
-
-        // cria um headers com o conteudo token Athorization, que esta no storage
-        let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
-
-        // faz requisiao get tipada (ClienteDTO) 
+         // faz requisiao get tipada (ClienteDTO) 
         // passando o parametros para o metodo /email do backend, email e o token
-        return this.http.get<ClienteDTO>(
-            `${API_CONFIG.baseUrl}/clientes/email?value=${email}`,
-            {'headers' : authHeader}); // passando o cabeçalho pra requisicao
-
+     return this.http.get<ClienteDTO>(
+         `${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
     }
 
     /** any - tipoglobal aceita qualquer retorno, cp - prefixo da img do cliente
