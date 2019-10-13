@@ -13,6 +13,7 @@ import { CategoriaService } from '../Services/domain/Categoria.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptors';
 import { AuthService } from '../Services/auth.service';
 import { StorageService } from '../Services/storage.service';
+import { ClienteService } from '../Services/domain/cliente.service';
 
 //  @NgModule - Decorator são configuração que possuem atribuos e objetos com atributos:[] para alterar a classe
 @NgModule({
@@ -37,7 +38,8 @@ import { StorageService } from '../Services/storage.service';
     CategoriaService,
     ErrorInterceptorProvider,
     AuthService, 
-    StorageService
+    StorageService,
+    ClienteService
   ]
 })
 export class AppModule {} // habilitando o uso desse modulo por outras classes
