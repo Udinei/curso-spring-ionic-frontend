@@ -43,12 +43,13 @@ export class HomePage {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => { // se inscrevendo para poder receber a resposta do metodo
-        console.log(response.headers)
-        console.log(response.headers.get("Authorization"));
-                                          
+          this.auth.sucessfullLogin(response.headers.get("Authorization"));
+          //console.log(response.headers.get("Authorization"));
         this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
       },
-        error => { }
+        error => { 
+          
+        }
       );
   }
 }

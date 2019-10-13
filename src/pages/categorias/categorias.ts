@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CategoriaService } from '../../Services/domain/Categorias.service';
+import { CategoriaService } from '../../Services/domain/Categoria.service';
 import { CategoriaDTO } from '../../models/categorias.dto';
 import { API_CONFIG } from '../../config/api.config';
 
@@ -27,17 +27,15 @@ export class CategoriasPage {
     this.categoriaService.findAll()
     .subscribe(response => {
       this.items = response;
-      //console.log(response);
+      
 
     }, error => {
-
+      //console.log(error);
       // As msg de erro estão sendo exibidas pelao interceptor( error-interceptors.ts)
       // Essa funcao ( error = { } ) em branco é necessaria para que, 
       // o erro não seja exibido duas vezes, mas ela pode ser usada para 
       // outros tratamentos de erros que se achar necessarios
-      error ={
-        
-      }
+     
 
     });
   
