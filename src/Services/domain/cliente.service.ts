@@ -1,6 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { StorageService } from "../storage.service";
 import { Observable } from "rxjs/Rx";
 import { ClienteDTO } from "../../models/cliente.dto";

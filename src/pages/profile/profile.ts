@@ -5,12 +5,7 @@ import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../Services/domain/cliente.service';
 import { API_CONFIG } from '../../config/api.config';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -23,7 +18,7 @@ export class ProfilePage {
    cliente: ClienteDTO;
 
   constructor(
-     public navCtrl: NavController,
+     public navCtrl: NavController, // responsavel pelo redirecionamento de paginas
      public navParams: NavParams,
      public storage: StorageService,
      public clienteService: ClienteService ) {

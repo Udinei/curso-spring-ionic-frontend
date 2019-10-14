@@ -32,11 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
             // continua o fluxo sem adicionar nada a requisicao 
             return next.handle(req);
         }
-
-
-        return next.handle(req)
-     
-       
+         
     }
 }
 
