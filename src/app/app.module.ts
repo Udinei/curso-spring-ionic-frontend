@@ -15,6 +15,7 @@ import { AuthService } from '../Services/auth.service';
 import { StorageService } from '../Services/storage.service';
 import { ClienteService } from '../Services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { ProdutoService } from '../Services/domain/produto.service';
 
 //  @NgModule - Decorator são configuração que possuem atribuos e objetos com atributos:[] para alterar a classe
 @NgModule({
@@ -41,7 +42,8 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     ErrorInterceptorProvider,
     AuthService, 
     StorageService,
-    ClienteService
+    ClienteService,
+    ProdutoService
   ]
 })
 export class AppModule {} // habilitando o uso desse modulo por outras classes

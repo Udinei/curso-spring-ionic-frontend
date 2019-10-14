@@ -11,7 +11,7 @@
   <p>Página de Categorias</p>
   <ion-list>
     <!-- (click)="showProdutosPage" - cada item sera um link, que for clicado vai para a pagina de produtos -->
-    <button ion-item *ngFor="let item of items" (click)="showProdutosPage()">
+    <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail item-start>
         <img src="{{ bucketUrl }}/cat{{ item.id }}.jpg">
       </ion-thumbnail>

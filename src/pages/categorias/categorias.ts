@@ -39,9 +39,11 @@ export class CategoriasPage {
 
     });
   }
+   
+  /**Esse metodo navega entre paginas passando parametros para outra pagina */
+  showProdutos(categoria_id : string) {
+    this.navCtrl.push('ProdutosPage', { categoria_id: categoria_id });   // passando parametro para a pagina de destino  
 
-  showProdutosPage() {
-    this.navCtrl.push('ProdutosPage');    
   }
 
   
