@@ -2,4 +2,5 @@
     baseUrl: "http://localhost:8081",
     bucketBaseUrl: "https://curso-spring-ionic-us.s3-sa-east-1.amazonaws.com"
                     
+                    
 }
