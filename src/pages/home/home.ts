@@ -53,9 +53,7 @@ export class HomePage {
       );
   }
 
-
-
-
+  // loga na app
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => { // se inscrevendo para poder receber a resposta do metodo
@@ -67,5 +65,10 @@ export class HomePage {
 
         }
       );
+  }
+
+  // registra um novo cliente
+  signup(){
+    this.navCtrl.push('SignupPage'); // empilha a pagina
   }
 }
