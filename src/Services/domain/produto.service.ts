@@ -2,12 +2,20 @@
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
 import { Observable } from "rxjs/Rx";
+import { ThrowStmt } from "@angular/compiler";
+import { ProdutoDTO } from "../../models/protuto.dto";
 
 
 @Injectable() // @Injectable() - permite a classe ser injetada em outras classes
 export class ProdutoService {
     
     constructor(public http: HttpClient)  {
+
+    }
+
+    /** retorna os dados do produto por id*/
+    findById(produto_id: string){
+        return this.http.get<ProdutoDTO>(`${API_CONFIG.baseUrl}/produtos/${produto_id}`);
 
     }
 
@@ -27,5 +35,14 @@ export class ProdutoService {
          let url = `${API_CONFIG.bucketBaseUrl}/prod${id}-small.jpg`; // obtem o endereco basico do bucket, e concatena  com o id do produto
          return this.http.get(url, {responseType : 'blob'}); // retorna o enderecço da imagem no bucket da amazon S3
      }
+
+     // obtem a imagem small do produto do bucket por id do produto
+     getImageFromBucket(id : string) : Observable<any> {
+        let url = `${API_CONFIG.bucketBaseUrl}/prod${id}.jpg`; // monta url da imagem do produto o endereco basico do bucket, e concatena  com o id do produto
+        return this.http.get(url, {responseType : 'blob'}); // retorna o enderecço da imagem no bucket da amazon S3
+    }
+
+
+     
 
 }

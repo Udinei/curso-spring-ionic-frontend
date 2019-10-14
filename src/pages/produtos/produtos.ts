@@ -54,8 +54,10 @@ export class ProdutosPage {
       error => {});
     }
   }
-
-  showDetail(){
-    this.navCtrl.push('ProdutoDetailPage');
+   
+  // Esse metodo sera utilizado no html, para receber o id do produto 
+  // do html produto.html, do item do produto
+  showDetail(produto_id : string){
+    this.navCtrl.push('ProdutoDetailPage', {  produto_id: produto_id });
   }
 }
