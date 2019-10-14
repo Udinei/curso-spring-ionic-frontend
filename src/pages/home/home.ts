@@ -16,7 +16,7 @@ import { AuthService } from '../../Services/auth.service';
 // Definicao e Nome da classe controladora
 export class HomePage {
 
-  creds : CredenciaisDTO = {
+  creds: CredenciaisDTO = {
     email: "",
     senha: ""
   };
@@ -40,15 +40,31 @@ export class HomePage {
     this.menu.swipeEnable(true);
   }
 
+  // evento de ciclo de vida
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => { // recebendo a resposta
+        this.auth.sucessfullLogin(response.headers.get("Authorization"));
+        this.navCtrl.setRoot('CategoriasPage') // redireciona para a pagina CategoriasPage
+      },
+        error => {
+
+        }
+      );
+  }
+
+
+
+
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => { // se inscrevendo para poder receber a resposta do metodo
-          this.auth.sucessfullLogin(response.headers.get("Authorization"));
-          //console.log(response.headers.get("Authorization"));
+        this.auth.sucessfullLogin(response.headers.get("Authorization"));
+        //console.log(response.headers.get("Authorization"));
         this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
       },
-        error => { 
-          
+        error => {
+
         }
       );
   }

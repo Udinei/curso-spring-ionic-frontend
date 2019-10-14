@@ -31,7 +31,23 @@ export class AuthService {
             });
     }
 
-    // recebe o token e seta no localStorage
+     /** Esse metodo atualiza o token automaticamente, sempre que o usuario estiver logado
+      e usar outras funcionalidades da app */
+     refreshToken() {
+       // Invocando o metodo Rest post de http e retorna um Observable,
+       // recebe  email e senha em creds e informa o objeto que vai receber a respostas e seus atributos (observe e responseType)
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/refresh_token`,
+            {},
+            {
+                observe: 'response',  // a resposta deve ser um response - vira no headers com o token
+                responseType: 'text'  // para o angular nao dar erro de parser, pois o mesmo vira de corpo vazio
+            });
+    }
+
+
+
+    /** Obtem o token e armazena  no localStorage */
     sucessfullLogin(authorizationValue : String){
         // obtem somente os caracteres token apos a palavra Barer 
         let tok = authorizationValue.substring(7);
