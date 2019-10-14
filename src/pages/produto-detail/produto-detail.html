@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-buttom menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ProdutoDetail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <!-- item? - Os objeto chamdo no html são criados no controlar  da pagina
+           ? operador de navegação segura do angular, 
+           o angular somente vai redenrizar essa var de valor dinamico
+           pelo controlador se existir valor algum valor
+           caso contrario pega imagem no endereco static padrao para produtos do app
+          [src] - é um bind de dados -->
+    <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'">
+    <ion-card-content>
+      <ion-card-title>
+        {{ item?.nome }}
+      </ion-card-title>
+      <p>
+        {{ item?.preco | currency }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block outline>Adicionar ao carrinho</button>
+</ion-content>
