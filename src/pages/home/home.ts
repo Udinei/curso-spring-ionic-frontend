@@ -40,7 +40,7 @@ export class HomePage {
     this.menu.swipeEnable(true);
   }
 
-  // evento de ciclo de vida
+  // evento de ciclo de vida, revalida o token sempre que for valido 
   ionViewDidEnter() {
     this.auth.refreshToken()
       .subscribe(response => { // recebendo a resposta
