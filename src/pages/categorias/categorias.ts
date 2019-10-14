@@ -38,8 +38,13 @@ export class CategoriasPage {
      
 
     });
-  
   }
+
+  showProdutosPage() {
+    this.navCtrl.push('ProdutosPage');    
+  }
+
+  
 
   
 
