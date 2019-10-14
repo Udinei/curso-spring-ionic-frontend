@@ -9,7 +9,7 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { CategoriaService } from '../Services/domain/Categoria.service';
+import { CategoriaService } from '../Services/domain/categoria.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptors';
 import { AuthService } from '../Services/auth.service';
 import { StorageService } from '../Services/storage.service';
