@@ -30,7 +30,7 @@ export class ProfilePage {
     if(localUser && localUser.email){
       this.clienteService.findByEmail(localUser.email) // retorna um clienteDTO
       .subscribe(response => { // se increvendo pra receber a resposta do metodo findByEmail em caso de sucesso
-          this.cliente = response; // atribui ao cliente o clienteDTO recebido do request
+          this.cliente = response as ClienteDTO; // as ClienteDTO é necessario para informar que vai ser retornado o objeto completo do backend 
           this.getImageIfExists();
       },
       error => { 

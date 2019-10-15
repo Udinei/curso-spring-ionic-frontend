@@ -16,11 +16,11 @@ export class ClienteService {
 
     /**  Esse metodo sera interceptado por AuthInterceptor, para inserir o cabeçalho na requisicao caso 
         busca clienteDTO no backend por email */
-    findByEmail(email: string) : Observable<ClienteDTO> {
+    findByEmail(email: string) {
 
          // faz requisiao get tipada (ClienteDTO) 
         // passando o parametros para o metodo /email do backend, email e o token
-     return this.http.get<ClienteDTO>(
+     return this.http.get(
          `${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
     }
 
