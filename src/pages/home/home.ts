@@ -42,10 +42,12 @@ export class HomePage {
 
   // evento de ciclo de vida, revalida o token sempre que for valido 
   ionViewDidEnter() {
+    
     this.auth.refreshToken()
       .subscribe(response => { // recebendo a resposta
         this.auth.sucessfullLogin(response.headers.get("Authorization"));
         this.navCtrl.setRoot('CategoriasPage') // redireciona para a pagina CategoriasPage
+        console.log(this.auth.sucessfullLogin(response.headers.get("Authorization")));
       },
         error => {
 
@@ -55,11 +57,12 @@ export class HomePage {
 
   // loga na app
   login() {
+    
     this.auth.authenticate(this.creds)
       .subscribe(response => { // se inscrevendo para poder receber a resposta do metodo
         this.auth.sucessfullLogin(response.headers.get("Authorization"));
-        //console.log(response.headers.get("Authorization"));
         this.navCtrl.setRoot('CategoriasPage') // vai para a pagina CategoriasPage
+        
       },
         error => {
 

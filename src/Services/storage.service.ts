@@ -1,11 +1,14 @@
 ﻿import { STORAGE_KEYS } from "../config/storage_keys.config";
 import { LocalUser } from "../models/local_user";
+import { Cart } from "../models/cart";
+import { Injectable } from "@angular/core";
 
 
+@Injectable()
 export class StorageService {
 
     // obtem dados do usuario local no storage do browser
-    getlocalUser() : LocalUser {
+    getLocalUser() : LocalUser {
         // obtem  o valor da chave localUser
         let usr = localStorage.getItem(STORAGE_KEYS.localUser);
         // valida a chave e retorna, o valor da chave ou null
@@ -26,8 +29,27 @@ export class StorageService {
         }
         // caso contrario, cria uma chave "localUser" com o valor do obj LocalUser
         else{
-            localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(obj));
+            localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
 
+        }
+    }
+
+    getCart() : Cart {
+        let str = localStorage.getItem(STORAGE_KEYS.cart);
+        if (str !== null) {
+            return JSON.parse(str);
+        }
+        else {
+            return null;
+        }
+    }
+
+    setCart(obj : Cart) {
+        if (obj !== null) {
+            localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(obj));
+        } 
+        else {
+            localStorage.removeItem(STORAGE_KEYS.cart);
         }
     }
 }

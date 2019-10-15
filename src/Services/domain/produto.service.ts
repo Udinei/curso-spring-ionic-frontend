@@ -2,8 +2,7 @@
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
 import { Observable } from "rxjs/Rx";
-import { ThrowStmt } from "@angular/compiler";
-import { ProdutoDTO } from "../../models/protuto.dto";
+import { ProdutoDTO } from "../../models/produto.dto";
 
 
 @Injectable() // @Injectable() - permite a classe ser injetada em outras classes

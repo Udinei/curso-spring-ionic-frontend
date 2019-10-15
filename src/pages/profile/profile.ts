@@ -26,7 +26,7 @@ export class ProfilePage {
 
   // esse metodo e carregado quando a pagina e exibida
   ionViewDidLoad() {
-    let localUser = this.storage.getlocalUser();
+    let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
       this.clienteService.findByEmail(localUser.email) // retorna um clienteDTO
       .subscribe(response => { // se increvendo pra receber a resposta do metodo findByEmail em caso de sucesso

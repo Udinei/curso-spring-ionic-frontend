@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //console.log("Passou no interceptor AuthInterceptor");
                 
-        let localUser = this.storage.getlocalUser();
+        let localUser = this.storage.getLocalUser();
         // verificando se a requisição é para o endereco da API
         let N = API_CONFIG.baseUrl.length; // obtenha o tamanho da url
         let requestToAPI = req.url.substring(0, N) == API_CONFIG.baseUrl; // testa se a url que esta vindo na requisicao(req) tem o mesmo tamanho da url da API

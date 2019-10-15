@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Rx";
 
 
 @Injectable() // @Injectable() - permite a classe ser injetada em outras classes
-export class CategoriaService {
+export class CategoriasService {
     
     constructor(public http: HttpClient)  {
 
