@@ -17,7 +17,8 @@ export class AuthService {
     constructor(
         public http: HttpClient,
         public storage: StorageService,
-        public cartService: CartService) {
+        public cartService: CartService,
+        ) {
 
     }
    
