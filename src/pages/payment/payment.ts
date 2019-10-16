@@ -34,6 +34,9 @@ export class PaymentPage {
 
  nextPage(){
   this.pedido.pagamento = this.formGroup.value;
-  console.log(this.pedido);
+
+  // setRoot em de push na navegação - para evitar inconsistencia de
+  // dados, porque podera mais voltar a tela de escolha de pagamento
+  this.navCtrl.setRoot('OrderConfirmationPage', {pedido: this.pedido});
  }
 }

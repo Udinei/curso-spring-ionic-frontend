@@ -14,6 +14,11 @@ export class ClienteService {
 
     }
 
+    findById(id: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
+   }
+
+
     /**  Esse metodo sera interceptado por AuthInterceptor, para inserir o cabeçalho na requisicao caso 
         busca clienteDTO no backend por email */
     findByEmail(email: string) {
