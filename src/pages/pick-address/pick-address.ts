@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EnderecoDTO } from '../../models/endereco.dto';
 import { StorageService } from '../../Services/storage.service';
 import { ClienteService } from '../../Services/domain/cliente.service';
+import { PedidoDTO } from '../../models/pedido.dto';
+import { CartService } from '../../Services/domain/cart.service';
 
 
 @IonicPage()
@@ -14,11 +16,14 @@ export class PickAddressPage {
 
   items: EnderecoDTO[];
 
+  pedido: PedidoDTO;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public cartService: CartService) {
   }
 
   ionViewDidLoad() {
@@ -27,6 +32,19 @@ export class PickAddressPage {
       this.clienteService.findByEmail(localUser.email) // retorna um clienteDTO
       .subscribe(response => { // se increvendo pra receber a resposta do metodo findByEmail em caso de sucesso
           this.items = response['enderecos'];
+           
+          let cart = this.cartService.getCart();
+
+          this.pedido = {
+            cliente: {id: response['id']},
+            enderecoDeEntrega: null,
+            pagamento: null,
+            // retorna uma nova lista de objetos, cujo objetos contem somente os atributos quantidade e o id do produto
+            itens: cart.items.map(x => { return {quantidade: x.quantidade, produto: {id: x.produto.id}}}),
+
+
+          }
+
       },
       error => { 
 
@@ -42,5 +60,9 @@ export class PickAddressPage {
     }
   }
 
+  nextPage(item: EnderecoDTO){
+    this.pedido.enderecoDeEntrega = {id: item.id};
+    console.log(this.pedido);
+  }
 
 }
