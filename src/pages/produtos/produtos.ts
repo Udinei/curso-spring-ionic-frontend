@@ -13,34 +13,39 @@ import { API_CONFIG } from '../../config/api.config';
 // classe controladora da interface DTO
 export class ProdutosPage {
 
-  items : ProdutoDTO[];
+  items: ProdutoDTO[];
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public produtoService: ProdutoService,
-    public loadingCtrl: LoadingController ) {
+    public loadingCtrl: LoadingController) {
   }
 
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+
+  loadData() {
     // pegando o parametro passado pela pagina anterior
     let categoria_id = this.navParams.get('categoria_id');
     let loader = this.presentLoading();
 
 
     this.produtoService.findByCategoria(categoria_id)
-    .subscribe(response => {
-      this.items = response['content']; // obtendo atributo (tipo lista) retornado pela api no response
-      loader.dismiss() // apos chegar a resposta com os itens fecha a animação
+      .subscribe(response => {
+        this.items = response['content']; // obtendo atributo (tipo lista) retornado pela api no response
+        loader.dismiss() // apos chegar a resposta com os itens fecha a animação
 
-      this.loadImageUrls(); // seta o endereco da imagem do produto no atributo ImageUrl de produtoDTO
-       
+        this.loadImageUrls(); // seta o endereco da imagem do produto no atributo ImageUrl de produtoDTO
 
-    },
-    error => {
-      loader.dismiss(); // se houver algum erro na resposta fecha a animacao
-    });
+
+      },
+        error => {
+          loader.dismiss(); // se houver algum erro na resposta fecha a animacao
+        });
 
   }
 
@@ -50,31 +55,40 @@ export class ProdutosPage {
   loadImageUrls() {
     // percorre a lista de produtos
     for (var i = 0; i < this.items.length; i++) {
-      
-      let item  = this.items[i];
-      
+
+      let item = this.items[i];
+
       // pra cada produto da lista, recupera a imagem small vinda no response, 
       this.produtoService.getSmallImageFromBucket(item.id)
-      .subscribe(response => {
-        // seta o endereco da imagem no item
-        item.imageUrl =  `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
-      },
-      error => {});
+        .subscribe(response => {
+          // seta o endereco da imagem no item
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
+        },
+          error => { });
     }
   }
-   
+
   // Esse metodo sera utilizado no html, para receber o id do produto 
   // do html produto.html, do item do produto
-  showDetail(produto_id : string){
-    this.navCtrl.push('ProdutoDetailPage', {  produto_id: produto_id });
+  showDetail(produto_id: string) {
+    this.navCtrl.push('ProdutoDetailPage', { produto_id: produto_id });
   }
 
-  presentLoading(){
+
+  presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Aguarde..."
     });
 
     loader.present();
     return loader; // controlando o loader
+  }
+
+  // faz animação ao scrooll carregando dados
+  doRefresh(refresher) {
+    this.loadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 }
