@@ -4,13 +4,17 @@ import { StorageService } from "../storage.service";
 import { Observable } from "rxjs/Rx";
 import { ClienteDTO } from "../../models/cliente.dto";
 import { API_CONFIG } from "../../config/api.config";
+import { ImageUtilService } from "../image-util.service.";
 
 
 
 @Injectable()
 export class ClienteService {
 
-    constructor(public http: HttpClient, public storage: StorageService){
+    constructor(
+        public http: HttpClient,
+        public storage: StorageService,
+        public imageUtilService: ImageUtilService){
 
     }
 
@@ -51,5 +55,23 @@ export class ClienteService {
         );
     }
 
+    uploadPicture(picture){
+        // convert para blob
+        let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
 
+        // criando 
+        let formData:  FormData = new FormData();
+
+        formData.set('file', pictureBlob, 'file.png');
+
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes/picture`,
+            formData, //a resposta da requisição vira nesse objeto
+            {
+                observe: 'response',  // a resposta da requisição vira nesse atributo
+                responseType: 'text' // e necessario porque o corpo da requisição vem vazio, isso evita que o json tente fazer o parse e com isso ocorra um erro
+            }
+        );
+
+     }
 }

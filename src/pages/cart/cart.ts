@@ -45,7 +45,8 @@ export class CartPage {
           .subscribe(response => {
             // seta o endereco da imagem no item
             item.produto.imageUrl =  `${API_CONFIG.bucketBaseUrl}/prod${item.produto.id}-small.jpg`;
-            console.log(item.produto.imageUrl);
+            //console.log(item.produto.imageUrl);
+            
           },
           error => {});
         }

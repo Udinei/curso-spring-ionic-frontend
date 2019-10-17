@@ -47,7 +47,7 @@ export class HomePage {
       .subscribe(response => { // recebendo a resposta
         this.auth.sucessfullLogin(response.headers.get("Authorization"));
         this.navCtrl.setRoot('CategoriasPage') // redireciona para a pagina CategoriasPage
-        console.log(this.auth.sucessfullLogin(response.headers.get("Authorization")));
+        //console.log(this.auth.sucessfullLogin(response.headers.get("Authorization")));
       },
         error => {
 

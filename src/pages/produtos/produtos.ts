@@ -43,8 +43,8 @@ export class ProdutosPage {
         let end = this.items.length - 1;
 
         loader.dismiss() // apos chegar a resposta com os itens fecha a animação
-        console.log(this.page);
-        console.log(this.items);
+        //console.log(this.page);
+        //console.log(this.items);
 
 
         this.loadImageUrls(start, end); // seta o endereco da imagem do produto no atributo ImageUrl de produtoDTO
