@@ -20,8 +20,8 @@ export class ProdutoService {
 
     /** Esse metodo chama uma api no backend, que retorna o id das categorias 
       do produto */
-     findByCategoria(categoria_id : string) {
-         return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}`);
+     findByCategoria(categoria_id : string, page : number = 0, linesPerPage: number = 24 ) {
+         return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}&page=${page}&linesPerPage=${linesPerPage}`);
      }
 
 

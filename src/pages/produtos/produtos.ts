@@ -13,7 +13,9 @@ import { API_CONFIG } from '../../config/api.config';
 // classe controladora da interface DTO
 export class ProdutosPage {
 
-  items: ProdutoDTO[];
+  items: ProdutoDTO[] = []; // a lista vai começar vazia
+  page: number = 0;
+
 
   constructor(
     public navCtrl: NavController,
@@ -34,12 +36,18 @@ export class ProdutosPage {
     let loader = this.presentLoading();
 
 
-    this.produtoService.findByCategoria(categoria_id)
+    this.produtoService.findByCategoria(categoria_id, this.page, 10) // recupera categiria de 10 em 10
       .subscribe(response => {
-        this.items = response['content']; // obtendo atributo (tipo lista) retornado pela api no response
-        loader.dismiss() // apos chegar a resposta com os itens fecha a animação
+        let start = this.items.length;
+        this.items = this.items.concat(response['content']); // junta a pagina anterior com a proxima(concate) obtendo atributo (tipo lista) retornado pela api no response
+        let end = this.items.length - 1;
 
-        this.loadImageUrls(); // seta o endereco da imagem do produto no atributo ImageUrl de produtoDTO
+        loader.dismiss() // apos chegar a resposta com os itens fecha a animação
+        console.log(this.page);
+        console.log(this.items);
+
+
+        this.loadImageUrls(start, end); // seta o endereco da imagem do produto no atributo ImageUrl de produtoDTO
 
 
       },
@@ -52,9 +60,9 @@ export class ProdutosPage {
   /** recebe o endereco da imagem e seta em cada item de produtoDTO no atributo imageUrl
       o endereço da imabem, quando usuario clicar na imagem carrega a imagem  do
       produto do bucket da S3 da amazon*/
-  loadImageUrls() {
+  loadImageUrls(start: number, end: number) {
     // percorre a lista de produtos
-    for (var i = 0; i < this.items.length; i++) {
+    for (var i = start; i <= end; i++) {
 
       let item = this.items[i];
 
@@ -86,9 +94,22 @@ export class ProdutosPage {
 
   // faz animação ao scrooll carregando dados
   doRefresh(refresher) {
-    this.loadData();
+    this.page = 0;  // começa da primeira pagina
+    this.items = [];  // limpa lista de itens
+
+    this.loadData(); // carrega os dados
     setTimeout(() => {
       refresher.complete();
     }, 1000);
+  }
+
+  doInfinite(infiniteScroll){
+    this.page++; // incrementa a pagina
+    this.loadData(); // recupera mais dados
+
+    setTimeout(() => {
+      infiniteScroll.complete(); // remove a animacao
+    }, 1000);
+
   }
 }
