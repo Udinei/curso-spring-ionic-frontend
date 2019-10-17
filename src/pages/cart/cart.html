@@ -29,5 +29,6 @@
     </ion-item>
   </ion-list>
 <button ion-button block (click)="goOn()">Continuar Comprando</button>
-<button ion-button color="secondary" block (click)="checkout()">Finalizar Pedido</button>
+<!-- *ngIf="total() > 0" - esse botão sera exibido somente se total for maior que zero -->
+<button *ngIf="total() > 0" ion-button color="secondary" block (click)="checkout()">Finalizar Pedido</button>
 </ion-content>

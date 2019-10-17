@@ -6,6 +6,8 @@ import { CartService } from '../../Services/domain/cart.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { EnderecoDTO } from '../../models/endereco.dto';
 import { ClienteService } from '../../Services/domain/cliente.service';
+import { PedidoService } from '../../Services/domain/pedido.service';
+
 
 
 
@@ -24,7 +26,8 @@ export class OrderConfirmationPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public cartService: CartService,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public pedidoService: PedidoService) {
 
      // pega o objeto pedido que foi enviado como parametro da pagina anterior, e seta em pedido 
     this.pedido = this.navParams.get('pedido');
@@ -57,5 +60,23 @@ export class OrderConfirmationPage {
   total(){
     return this.cartService.total();
 
+  }
+
+  back(){
+    this.navCtrl.setRoot('CartPage');
+  }
+
+  checkout(){
+    this.pedidoService.insert(this.pedido)
+    .subscribe(response => {
+      this.cartService.createOrClearCart();
+      console.log(response.headers.get('location'));
+    },
+       error => {
+         if(error.status == 403) {
+           this.navCtrl.setRoot('HomePage');
+         }
+       
+    });
   }
 }
