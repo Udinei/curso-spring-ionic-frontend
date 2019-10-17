@@ -22,12 +22,14 @@ export class OrderConfirmationPage {
   cartItems: CartItem[];
   cliente: ClienteDTO;
   endereco: EnderecoDTO;
+  codpedido: string;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public cartService: CartService,
     public clienteService: ClienteService,
-    public pedidoService: PedidoService) {
+    public pedidoService: PedidoService,
+    ) {
 
      // pega o objeto pedido que foi enviado como parametro da pagina anterior, e seta em pedido 
     this.pedido = this.navParams.get('pedido');
@@ -49,6 +51,7 @@ export class OrderConfirmationPage {
     });
   }
 
+
   // retorna um enderecoDTO que tem o id passado como parametro
   private findEndereco(id: string, list: EnderecoDTO[]) : EnderecoDTO {
 
@@ -57,20 +60,27 @@ export class OrderConfirmationPage {
     return list[position];
   }
 
+
   total(){
     return this.cartService.total();
 
   }
 
+
   back(){
     this.navCtrl.setRoot('CartPage');
+  }
+
+  home(){
+    this.navCtrl.setRoot('CategoriasPage');
   }
 
   checkout(){
     this.pedidoService.insert(this.pedido)
     .subscribe(response => {
       this.cartService.createOrClearCart();
-      console.log(response.headers.get('location'));
+      this.codpedido = this.extractId(response.headers.get('location'));
+      
     },
        error => {
          if(error.status == 403) {
@@ -78,5 +88,14 @@ export class OrderConfirmationPage {
          }
        
     });
+  }
+
+  /** Retorna o id do pedido */
+  private extractId(location: string): string {
+    // retorna a posição(index) da barra /
+    let position = location.lastIndexOf('/');
+    // retorna todo o conteudo apos a posicao da barra ate o final
+    return location.substring(position + 1, location.length);
+   
   }
 }
